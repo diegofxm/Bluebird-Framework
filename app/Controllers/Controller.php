@@ -20,4 +20,9 @@ class Controller
             return 'El archivo NO existe';
         }
     }
+
+    public function redirect($route)
+    {
+        header("Location: {$route}");
+    }
 }
