@@ -23,6 +23,10 @@ class Route
         $uri = $_SERVER['REQUEST_URI'];
         $uri = trim($uri, '/');
 
+        if (strpos($uri, '?')) {
+            $uri = substr($uri, 0, strpos($uri, '?'));
+        }
+
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes[$method] as $route => $callback) {
@@ -38,11 +42,11 @@ class Route
                 //$response = $callback(...$params);
 
 
-                if(is_callable($callback)){
+                if (is_callable($callback)) {
                     $response = $callback(...$params);
                 }
 
-                if(is_array($callback)){
+                if (is_array($callback)) {
                     $controller = new $callback[0];
 
                     $response = $controller->{$callback[1]}(...$params);
@@ -56,7 +60,7 @@ class Route
                 } else {
                     echo $response;
                 }
-                
+
                 return;
             }
         }

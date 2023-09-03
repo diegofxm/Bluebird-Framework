@@ -10,7 +10,8 @@ class ContactController extends Controller
     {
 
         $model = new Contact;
-        $contacts = $model->all();
+        
+        $contacts = $model->paginate(3);
 
         return $this->view('contacts.index', compact('contacts'));
     }
@@ -60,6 +61,5 @@ class ContactController extends Controller
         $model = new Contact;
         $model->delete($id);
         return $this->redirect('/contacts');
-
     }
 }
