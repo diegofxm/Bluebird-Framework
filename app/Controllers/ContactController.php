@@ -11,9 +11,9 @@ class ContactController extends Controller
 
         $model = new Contact;
 
-
         if (isset($_GET['search'])) {
-            $contacts = $model->where('name', 'LIKE', '%' . $_GET['search'] . '%')->paginate(3);
+            $contacts = $model->where('name', 'LIKE', '%' . $_GET['search'] . '%')
+                            ->paginate(1);
         } else {
             $contacts = $model->paginate(3);
         }
